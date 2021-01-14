@@ -5,7 +5,12 @@ import {Ionicons} from "@expo/vector-icons";
 
 import {styles} from './styles'
 
+import Home, {quizLists} from './Home'
+import shuffle from "./Global";
+import DrawerButton from "./DrawerButton";
+
 export default class Sidebar extends React.Component {
+
     state = {
         routes:[
             {
@@ -14,7 +19,7 @@ export default class Sidebar extends React.Component {
             },
             {
                 name:"Test",
-                icon:"ios-contact"
+                icon:"ios-contact",
             },
             {
                 name:"Results",
@@ -25,15 +30,6 @@ export default class Sidebar extends React.Component {
 
 
     render(){
-
-        function Item({ item, navigate }) {
-            return (
-                <TouchableOpacity style={styles.listItem} onPress={()=>navigate(item.name)}>
-                    <Ionicons name={item.icon} size={32} />
-                    <Text style={styles.title}>{item.name}</Text>
-                </TouchableOpacity>
-            );
-        }
 
         return (
             <View style={styles.container}>
@@ -52,12 +48,20 @@ export default class Sidebar extends React.Component {
 
                 <View style={styles.sidebarDivider}/>
 
-                <FlatList
-                    style={{width:"100%",marginLeft:30}}
-                    data={this.state.routes}
-                    renderItem={({ item }) => <Item  item={item} navigate={this.props.navigation.navigate}/>}
-                    keyExtractor={item => item.name}
-                />
+                <View style={{width:"100%"}}>
+                    {
+                        (quizLists.length > 0)  ?
+                            shuffle(quizLists).map((element, index) => {
+                                return <DrawerButton
+                                    navigation={this.props.navigation} quizID={element.id}
+                                    key={index}
+                                    name={element.name} target="Test"
+                                />
+                            })
+                            : null
+                    }
+                </View>
+
             </View>
         )
     }

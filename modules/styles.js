@@ -10,7 +10,7 @@ export let styles = StyleSheet.create({
     },
     view: {
         paddingHorizontal: 20,
-        paddingBottom: 400
+        paddingBottom: 150
     },
     listItem: {
         height: 60,
