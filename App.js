@@ -81,9 +81,6 @@ export default class App extends React.Component {
         await this.prepareResources();
     }
 
-    /**
-     * Method that serves to load resources and make API calls
-     */
     prepareResources = async () => {
         try {
             await performAPICalls();
